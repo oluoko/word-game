@@ -45,7 +45,7 @@ public class Board : MonoBehaviour
     private Keyboard keyboard;
     private GameSettings.Difficulty currentDifficulty;
     
-    // Track if game ended naturally (won/lost) vs user navigating away
+    
     private bool gameEndedNaturally = false;
 
     private void Start()
@@ -56,7 +56,7 @@ public class Board : MonoBehaviour
 
     public void NewGame()
     {
-        // Check if there's an unfinished game to restore
+        
         if (GameSettings.Instance != null && GameSettings.Instance.HasUnfinishedGame)
         {
             RestoreSavedGame();
@@ -105,7 +105,6 @@ public class Board : MonoBehaviour
             currentDifficulty = GameSettings.Instance.CurrentDifficulty;
         }
         
-        // Restore board state
         for (int r = 0; r < rows.Length && r < boardState.Length; r++)
         {
             if (!string.IsNullOrEmpty(boardState[r]))
@@ -119,7 +118,6 @@ public class Board : MonoBehaviour
                     {
                         rows[r].tiles[c].SetLetter(word[c]);
                         
-                        // Restore tile state
                         if (c < states.Length)
                         {
                             Tile.State state = CharToTileState(states[c]);
@@ -130,22 +128,19 @@ public class Board : MonoBehaviour
             }
         }
         
-        // Restore keyboard state directly without resetting first
+        
         if (virtualKeyboard != null && !string.IsNullOrEmpty(keyboardState))
         {
-            Debug.Log($"Restoring keyboard state: {keyboardState}");
             virtualKeyboard.RestoreKeyboardState(keyboardState);
         }
         
         gameEndedNaturally = false;
         enabled = true;
-        
-        Debug.Log($"Restored game: Word={wordToGuess}, Row={rowIndex}, Col={columnIndex}, Guesses={currentGuessCount}");
     }
 
     public void TryAgain()
     {
-        // Clear saved game when trying again
+        
         GameSettings.Instance?.ClearSavedGame();
         
         ClearBoard();
@@ -171,7 +166,6 @@ public class Board : MonoBehaviour
     {
         wordToGuess = solutions[Random.Range(0, solutions.Length)];
         wordToGuess = wordToGuess.ToLower().Trim();
-        Debug.Log("Word to guess: " + wordToGuess);
     }
 
     private void Awake()
@@ -279,7 +273,7 @@ public class Board : MonoBehaviour
         {
             submitButton.GetComponentInChildren<TextMeshProUGUI>().text = "Not a word";
             submitButton.GetComponentInChildren<Image>().color = wrongColor;
-            Debug.Log("Invalid word: " + row.word);
+            
             return;
         }
 
@@ -342,7 +336,7 @@ public class Board : MonoBehaviour
                 GameStatistics.Instance.RecordGameWin(currentDifficulty, currentGuessCount);
             }
             
-            // Clear saved game since it's complete
+            
             GameSettings.Instance?.ClearSavedGame();
             
             enabled = false;
@@ -361,14 +355,14 @@ public class Board : MonoBehaviour
                 GameStatistics.Instance.RecordGameLoss(currentDifficulty);
             }
             
-            // Clear saved game since it's complete
+            
             GameSettings.Instance?.ClearSavedGame();
             
             enabled = false;
         }
         else
         {
-            // Save game state after each valid row submission
+            
             SaveCurrentGameState();
         }
     }
@@ -408,7 +402,7 @@ public class Board : MonoBehaviour
         if (state == incorrectState) return 'I';
         if (state == misplacedState) return 'M';
         if (state == occupiedState) return 'O';
-        return 'E'; // Empty
+        return 'E'; 
     }
 
     private Tile.State CharToTileState(char c)
@@ -533,10 +527,10 @@ public class Board : MonoBehaviour
 
     private void OnDisable()
     {
-        // Only show win/loss panels and play sounds if game ended naturally
+        
         if (!gameEndedNaturally)
         {
-            // User is navigating away - save the current game state
+            
             if (enabled && rowIndex < rows.Length)
             {
                 SaveCurrentGameState();
