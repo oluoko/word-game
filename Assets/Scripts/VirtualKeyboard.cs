@@ -106,14 +106,12 @@ public class VirtualKeyboard : MonoBehaviour
             VirtualKey key = keyPair.Value;
             string keyState = key.GetCurrentStateType();
             
-            // Save ALL states, including default, so we capture pre-marked incorrect keys
             if (!string.IsNullOrEmpty(keyState))
             {
                 state += key.letter + ":" + keyState + ",";
             }
         }
         
-        Debug.Log($"GetKeyboardState: {state.TrimEnd(',')}");
         return state.TrimEnd(',');
     }
 
@@ -121,11 +119,8 @@ public class VirtualKeyboard : MonoBehaviour
     {
         if (string.IsNullOrEmpty(stateString))
         {
-            Debug.Log("RestoreKeyboardState: Empty state string");
             return;
         }
-        
-        Debug.Log($"RestoreKeyboardState: Processing '{stateString}'");
         
         string[] keyStates = stateString.Split(',');
         
@@ -139,9 +134,6 @@ public class VirtualKeyboard : MonoBehaviour
                 char letter = parts[0][0];
                 string state = parts[1];
                 
-                Debug.Log($"RestoreKeyboardState: Setting {letter} to {state}");
-                
-                // Directly set the state, bypassing the priority logic in UpdateKeyState
                 letter = char.ToUpper(letter);
                 if (letterKeys.ContainsKey(letter))
                 {
