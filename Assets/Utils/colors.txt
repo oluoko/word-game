@@ -1,0 +1,37 @@
+background_color="#F8F0D8"
+disable_button_color="#AFB3BC"
+hint_color="#905898"
+green_color="#30B040"
+keys_background="#F1D3BA"
+keys_color="#0D0B09"    
+misplaced_color="#FBBE3B"
+incorrect_color="#545C54"
+red_color="#F84948" 
+
+
+// background_color="#F8F0D8"
+Color backgroundColor = new Color(0.973f, 0.941f, 0.847f);
+
+// disable_button_color="#AFB3BC"
+Color disableButtonColor = new Color(0.686f, 0.702f, 0.737f);
+
+// hint_color="#905898"
+Color hintColor = new Color(0.565f, 0.345f, 0.596f);
+
+// green_color="#30B040"
+Color greenColor = new Color(0.188f, 0.690f, 0.251f);
+
+// keys_background="#F1D3BA"
+Color keysBackground = new Color(0.945f, 0.827f, 0.729f);
+
+// keys_color="#0D0B09"
+Color keysColor = new Color(0.051f, 0.043f, 0.035f);
+
+// misplaced_color="#FBBE3B"
+Color misplacedColor = new Color(0.984f, 0.745f, 0.231f);
+
+// incorrect_color="#545C54"
+Color incorrectColor = new Color(0.329f, 0.361f, 0.329f);
+
+// red_color
+Color redColor = new Color()
