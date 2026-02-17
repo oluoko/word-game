@@ -22,6 +22,7 @@ public class MainMenu : MonoBehaviour
     [Header("Audio Controls")]
     public Toggle musicToggle;
     public Toggle soundToggle;
+    public TextMeshProUGUI difficultyStringText;
 
     Color easyColor = new Color(0.188f, 0.690f, 0.251f);
     Color mediumColor = new Color(0.984f, 0.745f, 0.231f);
@@ -29,6 +30,11 @@ public class MainMenu : MonoBehaviour
 
     private void Start()
     {
+        if (difficultyStringText != null)
+        {
+            difficultyStringText.text = "Reset your " + GameSettings.Instance.GetCurrentDifficultyString() + " stats";
+        }
+
         if (GameSettings.Instance == null)
         {
             GameObject settingsObj = new GameObject("GameSettings");

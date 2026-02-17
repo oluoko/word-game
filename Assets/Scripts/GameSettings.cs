@@ -55,6 +55,21 @@ public class GameSettings : MonoBehaviour
         }
     }
 
+    public string GetCurrentDifficultyString()
+    {
+        switch (currentDifficulty)
+        {
+            case Difficulty.Easy:
+                return "Easy";
+            case Difficulty.Medium:
+                return "Medium";
+            case Difficulty.Hard:
+                return "Hard";
+            default:
+                return "Medium";
+        }
+    }
+
     public bool IsMusicEnabled
     {
         get { return isMusicEnabled; }

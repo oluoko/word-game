@@ -110,6 +110,7 @@ public class StatsDisplay : MonoBehaviour
     {
         if (GameStatistics.Instance != null)
         {
+            AudioManager.Instance?.PlayButtonClick();
             GameStatistics.Instance.ResetAllStats();
             RefreshStats();
         }
